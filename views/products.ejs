@@ -1,0 +1,95 @@
+<%- include("partials/header") %>
+
+<section class="catalog-shell">
+  <div class="container">
+    <div class="catalog-topbar">
+      <div>
+        <p class="section-kicker">Catalog</p>
+        <h1 class="catalog-title">Shop Collection</h1>
+        <p class="catalog-subtitle">A more immersive browse experience with gallery previews and polished product cards.</p>
+      </div>
+    </div>
+
+    <% if (!products.length) { %>
+      <div class="empty-state polished-card">
+        <p>No products found. Run <code>npm run seed</code> to insert sample data.</p>
+      </div>
+    <% } else { %>
+      <% const fallbackGallery = [
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80"
+      ]; %>
+
+      <section class="catalog-grid">
+        <% products.forEach((product, index) => { %>
+          <% const mainImage = product.images && product.images.length ? product.images[0] : fallbackGallery[index % fallbackGallery.length]; %>
+          <% const galleryImages = product.images && product.images.length ? product.images : [
+            mainImage,
+            fallbackGallery[(index + 1) % fallbackGallery.length],
+            fallbackGallery[(index + 2) % fallbackGallery.length]
+          ]; %>
+          <% const galleryPayload = encodeURIComponent(JSON.stringify(galleryImages)); %>
+
+          <article class="catalog-card">
+            <button
+              class="image-trigger"
+              type="button"
+              data-gallery-images="<%= galleryPayload %>"
+              data-gallery-title="<%= product.name %>"
+              aria-label="Open gallery for <%= product.name %>"
+            >
+              <img class="catalog-product-image" src="<%= mainImage %>" alt="<%= product.name %>" loading="lazy" />
+            </button>
+
+            <div class="catalog-card-meta">
+              <p class="catalog-category"><%= product.category %></p>
+              <h2 class="catalog-product-name"><%= product.name %></h2>
+              <p class="catalog-product-price"><%= formatCurrency(product.price) %></p>
+
+              <div class="catalog-actions">
+                <a class="btn btn-brand btn-block" href="/products/<%= product._id %>">View Product</a>
+                <form action="/cart/add" method="POST" class="js-add-cart-form">
+                  <input type="hidden" name="productId" value="<%= product._id %>" />
+                  <input type="hidden" name="quantity" value="1" />
+                  <button
+                    type="submit"
+                    class="btn btn-ghost btn-block"
+                    data-product-name="<%= product.name %>"
+                    data-quantity="1"
+                    <%= product.stock <= 0 ? "disabled" : "" %>
+                  >
+                    <%= product.stock <= 0 ? "Out of Stock" : "Add to Cart" %>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </article>
+        <% }); %>
+      </section>
+    <% } %>
+  </div>
+</section>
+
+<section class="gallery-modal" id="galleryModal" aria-hidden="true">
+  <button class="gallery-backdrop" type="button" data-gallery-close aria-label="Close gallery"></button>
+  <div class="gallery-panel" role="dialog" aria-modal="true" aria-label="Product Image Gallery">
+    <div class="gallery-image-wrap">
+      <button class="gallery-close" type="button" data-gallery-close aria-label="Close gallery">&times;</button>
+      <button class="gallery-nav prev" type="button" id="galleryPrev" aria-label="Previous image">&#10094;</button>
+      <img class="gallery-image" id="galleryImage" src="" alt="Product gallery image" />
+      <button class="gallery-nav next" type="button" id="galleryNext" aria-label="Next image">&#10095;</button>
+    </div>
+    <div class="gallery-meta">
+      <p class="gallery-title" id="galleryTitle"></p>
+      <p class="gallery-count" id="galleryCount"></p>
+    </div>
+  </div>
+</section>
+
+<div class="cart-feedback" id="cartFeedback" role="status" aria-live="polite"></div>
+
+<%- include("partials/footer") %>

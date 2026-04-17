@@ -1,0 +1,79 @@
+<%- include("partials/header") %>
+
+<% const itemCount = cart.items.reduce((sum, item) => sum + item.quantity, 0); %>
+
+<section class="page-shell">
+  <div class="container">
+    <div class="page-hero">
+      <div class="page-copy">
+        <p class="page-eyebrow">Cart</p>
+        <h1>Shopping bag</h1>
+        <p>Review selected products, confirm totals, and get the basket ready for checkout expansion.</p>
+      </div>
+      <div class="cart-overview">
+        <article class="cart-overview-card">
+          <span class="overview-label">Items</span>
+          <strong><%= itemCount %></strong>
+        </article>
+        <article class="cart-overview-card">
+          <span class="overview-label">Total</span>
+          <strong><%= formatCurrency(total) %></strong>
+        </article>
+      </div>
+    </div>
+
+    <% if (!cart.items.length) { %>
+      <div class="empty-state polished-card">
+        <h2>Your cart is empty</h2>
+        <p>Start building your basket from the upgraded catalog experience.</p>
+        <div class="empty-state-actions">
+          <a class="btn btn-brand" href="/products">Browse Products</a>
+          <a class="btn btn-ghost" href="/">Back Home</a>
+        </div>
+      </div>
+    <% } else { %>
+      <section class="cart-layout">
+        <div class="cart-list">
+          <% cart.items.forEach((item) => { %>
+            <article class="cart-item">
+              <div class="cart-item-meta">
+                <p class="catalog-category"><%= item.quantity %> selected</p>
+                <h2 class="cart-item-title"><%= item.name %></h2>
+                <div class="cart-item-copy">
+                  <span>Unit price <strong><%= formatCurrency(item.price) %></strong></span>
+                  <span>Line total <strong><%= formatCurrency(item.price * item.quantity) %></strong></span>
+                </div>
+              </div>
+
+              <div class="cart-item-side">
+                <p class="cart-item-subtotal"><%= formatCurrency(item.price * item.quantity) %></p>
+                <form action="/cart/remove" method="POST">
+                  <input type="hidden" name="productId" value="<%= item.productId %>" />
+                  <button class="btn btn-danger" type="submit">Remove</button>
+                </form>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+
+        <aside class="cart-summary cart-summary-card">
+          <p class="page-eyebrow">Summary</p>
+          <h2>Order snapshot</h2>
+          <div class="summary-stack">
+            <p><span>Items</span><strong><%= itemCount %></strong></p>
+            <p><span>Subtotal</span><strong><%= formatCurrency(total) %></strong></p>
+            <p><span>Shipping</span><strong>Calculated later</strong></p>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <strong><%= formatCurrency(total) %></strong>
+          </div>
+          <a class="btn btn-brand btn-block" href="/checkout">Proceed to Checkout</a>
+          <a class="btn btn-ghost btn-block" href="/products">Continue Shopping</a>
+        </aside>
+      </section>
+    <% } %>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

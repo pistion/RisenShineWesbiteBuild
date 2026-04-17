@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+
+<section class="page-shell">
+  <div class="container narrow-status">
+    <article class="status-card <%= success ? 'status-ok' : 'status-warn' %>">
+      <p class="page-eyebrow"><%= success ? 'Order Confirmed' : 'Checkout Stopped' %></p>
+      <h1><%= success ? 'Your demo order has been placed' : 'Checkout could not be completed' %></h1>
+      <p><%= message %></p>
+
+      <% if (order) { %>
+        <div class="status-details">
+          <p><span>Order ID</span><strong><%= order.id %></strong></p>
+          <p><span>Items</span><strong><%= order.itemCount %></strong></p>
+          <p><span>Total</span><strong><%= formatCurrency(order.subtotal) %></strong></p>
+          <p><span>Customer</span><strong><%= order.customer.name %></strong></p>
+        </div>
+      <% } %>
+
+      <div class="status-actions">
+        <a class="btn btn-brand" href="/products">Continue Shopping</a>
+        <a class="btn btn-ghost" href="/">Return Home</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

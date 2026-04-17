@@ -1,0 +1,102 @@
+<%- include("partials/header") %>
+
+<section class="checkout-shell">
+  <div class="container">
+    <div class="page-hero">
+      <div class="page-copy">
+        <p class="page-eyebrow">Checkout</p>
+        <h1>Complete your order</h1>
+        <p>
+          This checkout page is designed as the next layer after cart review. It captures customer details,
+          shows a polished order summary, and can be connected to payment providers next.
+        </p>
+      </div>
+    </div>
+
+    <div class="checkout-layout">
+      <section class="checkout-card">
+        <p class="page-eyebrow">Customer Details</p>
+        <h2>Shipping information</h2>
+
+        <% if (errors.length) { %>
+          <div class="form-errors">
+            <ul class="info-list">
+              <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }); %>
+            </ul>
+          </div>
+        <% } %>
+
+        <form action="/checkout" method="POST" class="checkout-form">
+          <div class="checkout-fields two-col-fields">
+            <label class="field-block">
+              <span class="field-label">Full Name</span>
+              <input type="text" name="name" value="<%= formData.name %>" required />
+            </label>
+            <label class="field-block">
+              <span class="field-label">Email</span>
+              <input type="email" name="email" value="<%= formData.email %>" required />
+            </label>
+          </div>
+
+          <div class="checkout-fields two-col-fields">
+            <label class="field-block">
+              <span class="field-label">Phone</span>
+              <input type="text" name="phone" value="<%= formData.phone %>" required />
+            </label>
+            <label class="field-block">
+              <span class="field-label">Country</span>
+              <input type="text" name="country" value="<%= formData.country %>" required />
+            </label>
+          </div>
+
+          <div class="checkout-fields two-col-fields">
+            <label class="field-block">
+              <span class="field-label">City</span>
+              <input type="text" name="city" value="<%= formData.city %>" required />
+            </label>
+            <label class="field-block field-block-wide">
+              <span class="field-label">Shipping Address</span>
+              <textarea name="address" rows="5" required><%= formData.address %></textarea>
+            </label>
+          </div>
+
+          <div class="checkout-actions">
+            <button type="submit" class="btn btn-brand">Place Demo Order</button>
+            <a href="/cart" class="btn btn-ghost">Back to Cart</a>
+          </div>
+        </form>
+      </section>
+
+      <aside class="checkout-card order-summary-card">
+        <p class="page-eyebrow">Order Summary</p>
+        <h2>What you're checking out</h2>
+        <div class="order-line-items">
+          <% cart.items.forEach((item) => { %>
+            <article class="order-line-item">
+              <div>
+                <h3><%= item.name %></h3>
+                <p><%= item.quantity %> x <%= formatCurrency(item.price) %></p>
+              </div>
+              <strong><%= formatCurrency(item.price * item.quantity) %></strong>
+            </article>
+          <% }); %>
+        </div>
+
+        <div class="summary-stack">
+          <p><span>Items</span><strong><%= itemCount %></strong></p>
+          <p><span>Subtotal</span><strong><%= formatCurrency(subtotal) %></strong></p>
+          <p><span>Shipping</span><strong>To be calculated</strong></p>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong><%= formatCurrency(subtotal) %></strong>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

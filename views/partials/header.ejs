@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %> | Ecommerce Starter</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="<%= bodyClass || 'default-page' %>">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="/">Ecommerce Starter</a>
+        <nav class="main-nav" aria-label="Primary Navigation">
+          <a class="nav-link <%= navActive === 'home' ? 'is-active' : '' %>" href="/">Home</a>
+          <a class="nav-link <%= navActive === 'products' ? 'is-active' : '' %>" href="/products">Products</a>
+          <a class="nav-link <%= navActive === 'cart' ? 'is-active' : '' %> cart-nav-link" href="/cart">Cart (<%= cartItemCount || 0 %>)</a>
+          <a class="nav-link <%= navActive === 'about' ? 'is-active' : '' %>" href="/about">About</a>
+          <a class="nav-link <%= navActive === 'contact' ? 'is-active' : '' %>" href="/contact">Contact</a>
+        </nav>
+      </div>
+      <% if (fallbackMode) { %>
+        <div class="status-banner">
+          Demo mode: serving bundled sample products because MongoDB is offline.
+        </div>
+      <% } %>
+    </header>
+    <main class="<%= mainClass || 'container default-main' %>">

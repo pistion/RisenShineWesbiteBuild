@@ -1,0 +1,50 @@
+<%- include("partials/header") %>
+
+<section class="page-shell">
+  <div class="container">
+    <div class="page-hero">
+      <div class="page-copy">
+        <p class="page-eyebrow">About</p>
+        <h1>Built as a scalable ecommerce foundation</h1>
+        <p>
+          This project is structured to give you a professional starting point for catalog,
+          cart, checkout, payments, and admin workflows without dumping all of that logic into a single file.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-grid">
+      <article class="info-card">
+        <p class="page-eyebrow">Architecture</p>
+        <h2>Clean separation of concerns</h2>
+        <ul class="info-list">
+          <li>Express routes, controllers, models, middleware, and config are separated.</li>
+          <li>Product access now runs through a shared store layer for easier future expansion.</li>
+          <li>The app can boot in fallback mode while MongoDB is offline.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <p class="page-eyebrow">Commerce Ready</p>
+        <h2>Prepared for the next features</h2>
+        <ul class="info-list">
+          <li>Session-based cart handling is already wired into the app flow.</li>
+          <li>The folder structure is ready for checkout, payment, and admin modules.</li>
+          <li>Sample product data makes the storefront usable before the live database is connected.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <p class="page-eyebrow">Frontend</p>
+        <h2>Designed to feel more premium</h2>
+        <ul class="info-list">
+          <li>The storefront now uses a stronger editorial visual direction.</li>
+          <li>Home and products pages were upgraded to feel more like a real branded shop.</li>
+          <li>These secondary pages now follow the same tone and spacing system.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

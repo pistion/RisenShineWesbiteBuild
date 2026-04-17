@@ -1,0 +1,142 @@
+<%- include("partials/header") %>
+
+<% const galleryImages = product.images && product.images.length ? product.images : [
+  "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80"
+]; %>
+
+<section class="product-view-shell">
+  <div class="container">
+    <div class="product-view-layout">
+      <div class="product-media-panel">
+        <button
+          class="image-trigger product-hero-media"
+          type="button"
+          data-gallery-images="<%= encodeURIComponent(JSON.stringify(galleryImages)) %>"
+          data-gallery-title="<%= product.name %>"
+          aria-label="Open gallery for <%= product.name %>"
+        >
+          <img src="<%= galleryImages[0] %>" alt="<%= product.name %>" class="product-view-image" loading="lazy" />
+        </button>
+
+        <div class="product-thumb-grid">
+          <% galleryImages.slice(0, 3).forEach((image, index) => { %>
+            <button
+              class="product-thumb image-trigger"
+              type="button"
+              data-gallery-images="<%= encodeURIComponent(JSON.stringify(galleryImages)) %>"
+              data-gallery-title="<%= product.name %>"
+              aria-label="Preview image <%= index + 1 %> for <%= product.name %>"
+            >
+              <img src="<%= image %>" alt="<%= product.name %> preview <%= index + 1 %>" loading="lazy" />
+            </button>
+          <% }); %>
+        </div>
+      </div>
+
+      <div class="product-info-panel">
+        <p class="page-eyebrow"><%= product.category %></p>
+        <h1 class="product-view-title"><%= product.name %></h1>
+        <p class="product-view-price"><%= formatCurrency(product.price) %></p>
+        <p class="product-view-description"><%= product.description %></p>
+
+        <div class="product-meta-strip">
+          <article class="meta-pill">
+            <span class="meta-label">Stock</span>
+            <strong><%= product.stock %> available</strong>
+          </article>
+          <article class="meta-pill">
+            <span class="meta-label">Gallery</span>
+            <strong><%= galleryImages.length %> images</strong>
+          </article>
+          <article class="meta-pill">
+            <span class="meta-label">Category</span>
+            <strong><%= product.category %></strong>
+          </article>
+        </div>
+
+        <form action="/cart/add" method="POST" class="detail-cart-form js-add-cart-form product-buy-form">
+          <input type="hidden" name="productId" value="<%= product._id %>" />
+
+          <label for="quantity" class="field-label">Quantity</label>
+          <input
+            id="quantity"
+            type="number"
+            name="quantity"
+            value="1"
+            min="1"
+            max="<%= product.stock > 0 ? product.stock : 1 %>"
+            <%= product.stock <= 0 ? "disabled" : "" %>
+          />
+          <button
+            type="submit"
+            class="btn btn-brand"
+            data-product-name="<%= product.name %>"
+            <%= product.stock <= 0 ? "disabled" : "" %>
+          >
+            <%= product.stock <= 0 ? "Out of Stock" : "Add to Cart" %>
+          </button>
+          <a class="btn btn-ghost" href="/cart">View Cart</a>
+        </form>
+
+        <div class="detail-note-card">
+          <h2>Why this product view works</h2>
+          <ul class="info-list">
+            <li>Large imagery makes the product feel more premium.</li>
+            <li>The purchase area is clearer and easier to act on.</li>
+            <li>The layout leaves room for future reviews, shipping, and variant selectors.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <% if (relatedProducts.length) { %>
+      <section class="related-section">
+        <div class="section-heading-row">
+          <div class="section-head section-head-inline">
+            <p class="section-kicker">Related Products</p>
+            <h2 class="section-title">Keep browsing the collection</h2>
+          </div>
+          <a class="btn btn-ghost" href="/products">View Full Catalog</a>
+        </div>
+
+        <div class="showcase-grid">
+          <% relatedProducts.forEach((item) => { %>
+            <% const image = item.images && item.images.length ? item.images[0] : galleryImages[0]; %>
+            <article class="showcase-card">
+              <a href="/products/<%= item._id %>" class="showcase-image-link" aria-label="View <%= item.name %>">
+                <img src="<%= image %>" alt="<%= item.name %>" class="showcase-image" loading="lazy" />
+              </a>
+              <div class="showcase-meta">
+                <p class="showcase-category"><%= item.category %></p>
+                <h3 class="showcase-name"><a href="/products/<%= item._id %>"><%= item.name %></a></h3>
+                <p class="showcase-price"><%= formatCurrency(item.price) %></p>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+      </section>
+    <% } %>
+  </div>
+</section>
+
+<section class="gallery-modal" id="galleryModal" aria-hidden="true">
+  <button class="gallery-backdrop" type="button" data-gallery-close aria-label="Close gallery"></button>
+  <div class="gallery-panel" role="dialog" aria-modal="true" aria-label="Product Image Gallery">
+    <div class="gallery-image-wrap">
+      <button class="gallery-close" type="button" data-gallery-close aria-label="Close gallery">&times;</button>
+      <button class="gallery-nav prev" type="button" id="galleryPrev" aria-label="Previous image">&#10094;</button>
+      <img class="gallery-image" id="galleryImage" src="" alt="Product gallery image" />
+      <button class="gallery-nav next" type="button" id="galleryNext" aria-label="Next image">&#10095;</button>
+    </div>
+    <div class="gallery-meta">
+      <p class="gallery-title" id="galleryTitle"></p>
+      <p class="gallery-count" id="galleryCount"></p>
+    </div>
+  </div>
+</section>
+
+<div class="cart-feedback" id="cartFeedback" role="status" aria-live="polite"></div>
+
+<%- include("partials/footer") %>

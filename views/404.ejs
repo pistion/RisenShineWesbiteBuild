@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+
+<section class="content-card">
+  <h1>404 - Page Not Found</h1>
+  <p>The requested page could not be found.</p>
+  <% if (typeof requestedUrl !== "undefined") { %>
+    <p><strong>URL:</strong> <%= requestedUrl %></p>
+  <% } %>
+  <a class="btn btn-primary" href="/">Return Home</a>
+</section>
+
+<%- include("partials/footer") %>

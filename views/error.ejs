@@ -1,0 +1,9 @@
+<%- include("partials/header") %>
+
+<section class="content-card">
+  <h1><%= statusCode || 500 %> - Something Went Wrong</h1>
+  <p><%= message || "An unexpected error occurred." %></p>
+  <a class="btn btn-primary" href="/">Return Home</a>
+</section>
+
+<%- include("partials/footer") %>
