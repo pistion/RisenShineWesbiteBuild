@@ -16,12 +16,28 @@
             <span class="brand-tag">Quiet essentials for an intentional life</span>
           </span>
         </a>
-        <nav class="main-nav" aria-label="Primary Navigation">
-          <a class="nav-link <%= navActive === 'home' ? 'is-active' : '' %>" href="/">Home</a>
-          <a class="nav-link <%= navActive === 'products' ? 'is-active' : '' %>" href="/products">Products</a>
-          <a class="nav-link <%= navActive === 'cart' ? 'is-active' : '' %> cart-nav-link" href="/cart">Cart (<%= cartItemCount || 0 %>)</a>
-          <a class="nav-link <%= navActive === 'about' ? 'is-active' : '' %>" href="/about">About</a>
-          <a class="nav-link <%= navActive === 'contact' ? 'is-active' : '' %>" href="/contact">Contact</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNavigation"
+          data-nav-toggle
+        >
+          <span class="nav-toggle-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="nav-toggle-label">Menu</span>
+        </button>
+        <nav class="main-nav-shell" aria-label="Primary Navigation" data-nav-shell>
+          <div class="main-nav" id="primaryNavigation" data-nav-panel>
+            <a class="nav-link <%= navActive === 'home' ? 'is-active' : '' %>" href="/">Home</a>
+            <a class="nav-link <%= navActive === 'products' ? 'is-active' : '' %>" href="/products">Products</a>
+            <a class="nav-link <%= navActive === 'about' ? 'is-active' : '' %>" href="/about">About</a>
+            <a class="nav-link <%= navActive === 'contact' ? 'is-active' : '' %>" href="/contact">Contact</a>
+            <a class="nav-link nav-link-pill <%= navActive === 'cart' ? 'is-active' : '' %> cart-nav-link" href="/cart">Cart (<%= cartItemCount || 0 %>)</a>
+          </div>
         </nav>
       </div>
       <% if (fallbackMode) { %>

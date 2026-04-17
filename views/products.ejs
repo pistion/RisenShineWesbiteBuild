@@ -6,7 +6,7 @@
       <div>
         <p class="section-kicker">Catalog</p>
         <h1 class="catalog-title">Shop Collection</h1>
-        <p class="catalog-subtitle">A more immersive browse experience with gallery previews and polished product cards.</p>
+        <p class="catalog-subtitle">Refined product cards with softer surfaces, clearer information, and an easier add-to-cart flow.</p>
       </div>
     </div>
 
@@ -24,45 +24,79 @@
         "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80"
       ]; %>
 
+      <% const tagMap = {
+        Footwear: ["EU38", "BLACK/WHITE"],
+        Bags: ["UTILITY", "ESPRESSO"],
+        Electronics: ["WIRELESS", "MIDNIGHT"],
+        Home: ["HAND-FINISH", "SOFT SAND"],
+        Apparel: ["RELAXED FIT", "NATURAL"],
+        Office: ["STUDIO", "GRAPHITE"]
+      }; %>
+
       <section class="catalog-grid">
         <% products.forEach((product, index) => { %>
           <% const mainImage = product.images && product.images.length ? product.images[0] : fallbackGallery[index % fallbackGallery.length]; %>
-          <% const galleryImages = product.images && product.images.length ? product.images : [
-            mainImage,
-            fallbackGallery[(index + 1) % fallbackGallery.length],
-            fallbackGallery[(index + 2) % fallbackGallery.length]
-          ]; %>
-          <% const galleryPayload = encodeURIComponent(JSON.stringify(galleryImages)); %>
+          <% const cardTags = tagMap[product.category] || ["CURATED", "SIGNATURE"]; %>
+          <% const cardAnimationClass = index % 3 === 1 ? "fade-delay-1" : index % 3 === 2 ? "fade-delay-2" : ""; %>
 
-          <article class="catalog-card">
-            <button
-              class="image-trigger"
-              type="button"
-              data-gallery-images="<%= galleryPayload %>"
-              data-gallery-title="<%= product.name %>"
-              aria-label="Open gallery for <%= product.name %>"
-            >
-              <img class="catalog-product-image" src="<%= mainImage %>" alt="<%= product.name %>" loading="lazy" />
-            </button>
+          <article class="catalog-card fade-up <%= cardAnimationClass %>">
+            <div class="catalog-card-top">
+              <button
+                class="catalog-favorite"
+                type="button"
+                aria-label="Save <%= product.name %>"
+                aria-pressed="false"
+                data-favorite-id="<%= product._id %>"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M12 20.2l-1.2-1.1C5.4 14.2 2 11.1 2 7.3 2 4.8 3.9 3 6.3 3c1.5 0 3 .7 3.9 1.9C11.1 3.7 12.6 3 14.1 3 16.5 3 18.4 4.8 18.4 7.3c0 3.8-3.4 6.9-8.8 11.8L12 20.2z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                  />
+                </svg>
+              </button>
 
-            <div class="catalog-card-meta">
-              <p class="catalog-category"><%= product.category %></p>
-              <h2 class="catalog-product-name"><%= product.name %></h2>
-              <p class="catalog-product-price"><%= formatCurrency(product.price) %></p>
+              <a class="catalog-visual-link" href="/products/<%= product._id %>" aria-label="View <%= product.name %>">
+                <span class="catalog-image-shadow" aria-hidden="true"></span>
+                <img class="catalog-product-image" src="<%= mainImage %>" alt="<%= product.name %>" loading="lazy" />
+              </a>
+            </div>
 
-              <div class="catalog-actions">
-                <a class="btn btn-brand btn-block" href="/products/<%= product._id %>">View Product</a>
-                <form action="/cart/add" method="POST" class="js-add-cart-form">
+            <div class="catalog-card-bottom">
+              <div class="catalog-copy-block">
+                <h2 class="catalog-product-name">
+                  <a href="/products/<%= product._id %>"><%= product.name %></a>
+                </h2>
+
+                <div class="catalog-tags">
+                  <span class="catalog-tag"><%= cardTags[0] %></span>
+                  <span class="catalog-tag"><%= cardTags[1] %></span>
+                </div>
+
+                <p class="catalog-product-description"><%= product.description %></p>
+              </div>
+
+              <div class="catalog-footer">
+                <div class="catalog-price-block">
+                  <span class="catalog-price-label">Price</span>
+                  <p class="catalog-product-price"><%= formatCurrency(product.price) %></p>
+                </div>
+
+                <form action="/cart/add" method="POST" class="js-add-cart-form catalog-cart-form">
                   <input type="hidden" name="productId" value="<%= product._id %>" />
                   <input type="hidden" name="quantity" value="1" />
                   <button
                     type="submit"
-                    class="btn btn-ghost btn-block"
+                    class="catalog-cart-btn"
                     data-product-name="<%= product.name %>"
                     data-quantity="1"
                     <%= product.stock <= 0 ? "disabled" : "" %>
                   >
-                    <%= product.stock <= 0 ? "Out of Stock" : "Add to Cart" %>
+                    <%= product.stock <= 0 ? "Out of stock" : "Add to cart" %>
                   </button>
                 </form>
               </div>
@@ -71,22 +105,6 @@
         <% }); %>
       </section>
     <% } %>
-  </div>
-</section>
-
-<section class="gallery-modal" id="galleryModal" aria-hidden="true">
-  <button class="gallery-backdrop" type="button" data-gallery-close aria-label="Close gallery"></button>
-  <div class="gallery-panel" role="dialog" aria-modal="true" aria-label="Product Image Gallery">
-    <div class="gallery-image-wrap">
-      <button class="gallery-close" type="button" data-gallery-close aria-label="Close gallery">&times;</button>
-      <button class="gallery-nav prev" type="button" id="galleryPrev" aria-label="Previous image">&#10094;</button>
-      <img class="gallery-image" id="galleryImage" src="" alt="Product gallery image" />
-      <button class="gallery-nav next" type="button" id="galleryNext" aria-label="Next image">&#10095;</button>
-    </div>
-    <div class="gallery-meta">
-      <p class="gallery-title" id="galleryTitle"></p>
-      <p class="gallery-count" id="galleryCount"></p>
-    </div>
   </div>
 </section>
 

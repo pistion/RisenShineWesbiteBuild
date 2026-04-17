@@ -1,6 +1,91 @@
 (function () {
   const modal = document.getElementById("galleryModal");
   const feedback = document.getElementById("cartFeedback");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const navShell = document.querySelector("[data-nav-shell]");
+  const favoriteButtons = document.querySelectorAll("[data-favorite-id]");
+
+  if (favoriteButtons.length) {
+    const storageKey = "rise-n-reign-favorites";
+    const readFavorites = () => {
+      try {
+        const saved = window.localStorage.getItem(storageKey);
+        const parsed = saved ? JSON.parse(saved) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    };
+
+    const writeFavorites = (favorites) => {
+      try {
+        window.localStorage.setItem(storageKey, JSON.stringify(favorites));
+      } catch (error) {
+        // Ignore storage write failures so the UI still works in private mode.
+      }
+    };
+
+    let favorites = readFavorites();
+
+    favoriteButtons.forEach((button) => {
+      const favoriteId = button.dataset.favoriteId;
+      const syncButtonState = () => {
+        const isActive = favorites.includes(favoriteId);
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      };
+
+      syncButtonState();
+
+      button.addEventListener("click", () => {
+        if (!favoriteId) {
+          return;
+        }
+
+        favorites = favorites.includes(favoriteId)
+          ? favorites.filter((id) => id !== favoriteId)
+          : [...favorites, favoriteId];
+
+        writeFavorites(favorites);
+        syncButtonState();
+      });
+    });
+  }
+
+  if (navToggle && navShell) {
+    const topbarInner = navToggle.closest(".topbar-inner");
+    const mobileQuery = window.matchMedia("(max-width: 991.98px)");
+
+    const closeNav = () => {
+      if (!topbarInner) {
+        return;
+      }
+
+      topbarInner.classList.remove("is-nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
+
+    const toggleNav = () => {
+      if (!topbarInner || !mobileQuery.matches) {
+        return;
+      }
+
+      const isOpen = topbarInner.classList.toggle("is-nav-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    };
+
+    navToggle.addEventListener("click", toggleNav);
+
+    navShell.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeNav);
+    });
+
+    mobileQuery.addEventListener("change", (event) => {
+      if (!event.matches) {
+        closeNav();
+      }
+    });
+  }
 
   if (modal) {
     const imageEl = document.getElementById("galleryImage");
