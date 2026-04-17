@@ -1,29 +1,50 @@
 <%- include("partials/header") %>
 
+<%
+  const homeFallbackGallery = [
+    "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80"
+  ];
+
+  const expressionLines = [
+    "Made for the parts of the day that ask for quiet movement and ease.",
+    "A familiar presence that carries what matters without pulling focus.",
+    "Something you reach for when the room, and your mind, need less noise.",
+    "Kept close in the small rituals that make a morning feel settled.",
+    "Worn into the rhythm of the week until it feels like it was always there.",
+    "Placed where light changes slowly and attention has room to soften."
+  ];
+
+  const featuredProducts = products.slice(0, 4);
+%>
+
 <section class="hero-section">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-copy fade-up">
-        <span class="hero-kicker">Curated Goods For Modern Living</span>
-        <h1 class="hero-title">Built to Feel Premium Before Checkout Ever Begins</h1>
+        <span class="hero-kicker">Hook</span>
+        <h1 class="hero-title">Not everything has to speak loudly to stay with you.</h1>
         <p class="hero-subtext">
-          A polished storefront experience with boutique energy, strong product storytelling,
-          and a catalog presentation that makes every item feel intentional.
+          Some things enter a life quietly and still change its shape. This is a place for that kind of presence.
         </p>
       </div>
 
       <div class="hero-actions fade-up fade-delay-1">
-        <p class="hero-actions-label">Start with the hero actions</p>
-        <a class="btn btn-brand" href="/products">
+        <p class="hero-actions-label">Begin Here</p>
+        <a class="btn btn-brand" href="#atmosphere">
           <span class="hero-btn-copy">
-            <strong>Shop Collection</strong>
-            <small>Browse the full storefront</small>
+            <strong>Step In</strong>
+            <small>Start with the feeling</small>
           </span>
         </a>
-        <a class="btn btn-soft" href="#featured-collection">
+        <a class="btn btn-soft" href="#expression">
           <span class="hero-btn-copy">
-            <strong>View Featured Picks</strong>
-            <small>Jump to curated highlights</small>
+            <strong>See the pieces</strong>
+            <small>Move closer to the pieces</small>
           </span>
         </a>
       </div>
@@ -31,83 +52,97 @@
   </div>
 </section>
 
-<section class="section-space">
+<section id="atmosphere" class="section-space">
   <div class="container">
     <div class="section-head fade-up">
-      <p class="section-kicker">Storefront Direction</p>
-      <h2 class="section-title">A homepage that sells atmosphere, not just inventory</h2>
+      <p class="section-kicker">Atmosphere</p>
+      <h2 class="section-title">A slower world, kept on purpose.</h2>
     </div>
-    <article class="story-card fade-up fade-delay-1">
-      <h2 class="section-title story-title">Clean merchandising with a more editorial first impression.</h2>
+    <article class="story-card fade-up fade-delay-1 story-stack">
       <p class="section-body">
-        This layout is designed to make your catalog feel curated and elevated. Large imagery,
-        softer luxury tones, and clearer product presentation give the storefront a stronger brand
-        identity from the first screen.
+        Here, the pace softens. Light stays a little longer on a surface. Familiar shapes settle into the room without asking to be noticed.
       </p>
-      <p class="section-body story-meta">
-        Category-ready. Mobile-friendly. Easy to extend into collections, promotions, and checkout.
+      <p class="section-body">
+        This is a world built around presence, repetition, and restraint. Around the quiet comfort of living with things that feel right long after the first glance.
       </p>
     </article>
   </div>
 </section>
 
-<section class="values-section">
+<section id="philosophy" class="values-section">
   <div class="container">
     <div class="section-head fade-up">
-      <p class="section-kicker">Why It Works</p>
-      <h2 class="section-title">More confidence in the UI means more confidence in the products</h2>
+      <p class="section-kicker">Philosophy</p>
+      <h2 class="section-title">We are not here for noise. We are here for what stays.</h2>
     </div>
-    <div class="value-grid">
-      <article class="value-card fade-up">
-        <span class="value-icon">01</span>
-        <h3>Stronger First Impression</h3>
-        <p>Hero-driven storytelling gives the storefront a premium, memorable opening.</p>
+    <div class="belief-grid">
+      <article class="belief-card fade-up">
+        <p class="belief-label">What We Reject</p>
+        <h3 class="belief-title">Nothing here is made to chase a moment.</h3>
+        <p class="belief-copy">There is enough urgency in the world already. We have no interest in adding more.</p>
       </article>
-      <article class="value-card fade-up fade-delay-1">
-        <span class="value-icon">02</span>
-        <h3>Sharper Catalog Flow</h3>
-        <p>Product sections feel curated instead of dumped into a generic grid.</p>
+      <article class="belief-card fade-up fade-delay-1">
+        <p class="belief-label">What We Keep</p>
+        <h3 class="belief-title">We return to pieces that feel settled, clear, and lasting.</h3>
+        <p class="belief-copy">What belongs should feel more natural with time, not less.</p>
       </article>
-      <article class="value-card fade-up fade-delay-2">
-        <span class="value-icon">03</span>
-        <h3>Better Expansion Path</h3>
-        <p>The page structure leaves room for collections, testimonials, campaigns, and promos.</p>
+      <article class="belief-card fade-up fade-delay-2">
+        <p class="belief-label">What We Remove</p>
+        <h3 class="belief-title">If it distracts, it does not stay.</h3>
+        <p class="belief-copy">We prefer form with a point of view and restraint with intention.</p>
       </article>
-      <article class="value-card fade-up fade-delay-3">
-        <span class="value-icon">04</span>
-        <h3>More Premium Visual Tone</h3>
-        <p>Typography, spacing, and layering create a more intentional brand presence.</p>
+      <article class="belief-card fade-up fade-delay-3">
+        <p class="belief-label">What We Believe</p>
+        <h3 class="belief-title">The right object does not compete with you. It moves with you.</h3>
+        <p class="belief-copy">It becomes part of the rhythm, part of the room, part of the way a day unfolds.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section id="featured-collection" class="section-space section-tight-top">
+<section id="identity" class="section-space section-tight-top">
+  <div class="container">
+    <div class="identity-grid">
+      <article class="story-card fade-up story-stack">
+        <p class="section-kicker">Identity</p>
+        <h2 class="section-title">You know when something feels right before you can explain it.</h2>
+        <p class="section-body">
+          You notice proportion. You care how something lands in a room, how it feels in the hand, how often you reach for it without thinking.
+        </p>
+        <p class="section-body">
+          You are not looking for more. You are looking for what belongs. For what aligns with the pace you protect and the attention you give to the details that stay with you.
+        </p>
+      </article>
+
+      <aside class="identity-note fade-up fade-delay-1">
+        <p>For the ones who trust quiet conviction.</p>
+        <p>For the ones who edit before they add.</p>
+        <p>For the ones who want less noise and more meaning around them.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="expression" class="section-space section-tight-top">
   <div class="container">
     <div class="section-heading-row fade-up">
       <div class="section-head section-head-inline">
-        <p class="section-kicker">Featured Collection</p>
-        <h2 class="section-title">Curated product highlights</h2>
+        <p class="section-kicker">Expression</p>
+        <h2 class="section-title">The pieces arrive as a continuation of the philosophy.</h2>
+        <p class="section-body">
+          Nothing here needs to announce itself. It simply finds its place in motion, in routine, in the quiet structure of a day.
+        </p>
       </div>
-      <a class="btn btn-brand" href="/products">Shop All Products</a>
+      <a class="btn btn-outline" href="/products">See more</a>
     </div>
 
-    <% const homeFallbackGallery = [
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80"
-    ]; %>
-
-    <% if (!products.length) { %>
+    <% if (!featuredProducts.length) { %>
       <div class="empty-state polished-card">
-        <p>No featured products available yet.</p>
+        <p>The collection is still taking shape.</p>
       </div>
     <% } else { %>
       <div class="showcase-grid">
-        <% products.forEach((product, index) => { %>
+        <% featuredProducts.forEach((product, index) => { %>
           <% const image = product.images && product.images.length ? product.images[0] : homeFallbackGallery[index % homeFallbackGallery.length]; %>
           <article class="showcase-card fade-up <%= index > 1 ? 'fade-delay-1' : '' %>">
             <a href="/products/<%= product._id %>" class="showcase-image-link" aria-label="View <%= product.name %>">
@@ -116,7 +151,8 @@
             <div class="showcase-meta">
               <p class="showcase-category"><%= product.category %></p>
               <h3 class="showcase-name"><a href="/products/<%= product._id %>"><%= product.name %></a></h3>
-              <p class="showcase-price"><%= formatCurrency(product.price) %></p>
+              <p class="showcase-copy"><%= expressionLines[index % expressionLines.length] %></p>
+              <a class="showcase-link" href="/products/<%= product._id %>">See more</a>
             </div>
           </article>
         <% }); %>
@@ -125,57 +161,101 @@
   </div>
 </section>
 
-<section class="gallery-section">
+<section id="craft" class="gallery-section">
   <div class="container">
-    <div class="section-head fade-up">
-      <p class="section-kicker">Visual Moodboard</p>
-      <h2 class="section-title">A storefront style that feels curated and editorial</h2>
-      <p class="section-body">
-        The visual direction here is meant to elevate everyday product browsing into a more
-        polished shopping experience.
-      </p>
-    </div>
+    <div class="craft-grid">
+      <article class="craft-card fade-up">
+        <p class="section-kicker">Craft / Intention</p>
+        <h2 class="section-title">Care shows in what was considered before anything was made visible.</h2>
+        <p class="section-body">
+          The line, the weight, the surface, the way something sits when it is finally at rest. These are the decisions that matter.
+        </p>
+        <p class="section-body">
+          We are drawn to objects that hold up under repetition. Not because they demand attention, but because they continue to deserve it.
+        </p>
+      </article>
 
-    <div class="gallery-grid fade-up fade-delay-1">
-      <a href="/products" class="gallery-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80" alt="Editorial storefront mood" loading="lazy" /></a>
-      <a href="/products" class="gallery-item"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Lifestyle presentation" loading="lazy" /></a>
-      <a href="/products" class="gallery-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Curated product styling" loading="lazy" /></a>
-      <a href="/products" class="gallery-item"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="Luxury-inspired visuals" loading="lazy" /></a>
+      <article class="craft-card fade-up fade-delay-1">
+        <ul class="craft-list">
+          <li>
+            <strong>Proportion</strong>
+            <span>Nothing feels overworked. Every element has room to breathe.</span>
+          </li>
+          <li>
+            <strong>Touch</strong>
+            <span>The experience begins before use, in the first reach and the second return.</span>
+          </li>
+          <li>
+            <strong>Longevity</strong>
+            <span>The goal is not novelty. The goal is to remain relevant in ordinary life.</span>
+          </li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="trust-section">
+<section id="access" class="section-space section-tight-top">
   <div class="container">
     <div class="section-head fade-up">
-      <p class="section-kicker">Experience Layer</p>
-      <h2 class="section-title">Designed to make the store feel established from day one</h2>
+      <p class="section-kicker">Access</p>
+      <h2 class="section-title">Affordable quality, made accessible.</h2>
+    </div>
+    <article class="story-card fade-up fade-delay-1 story-stack">
+      <p class="section-body">
+        Whether you're buying one item or ordering in bulk, we make sourcing simple.
+      </p>
+      <p class="section-body">
+        We also partner with small businesses to streamline their online orders and proudly support local designers by bringing their unique traditional crafts to a wider audience.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section id="trust" class="trust-section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <p class="section-kicker">Trust Layer</p>
+      <h2 class="section-title">The point is not to impress at first glance. It is to feel true every time after.</h2>
     </div>
     <div class="trust-grid">
       <article class="trust-card fade-up">
-        <p class="trust-quote">"The homepage feels like a real brand, not just a starter template with products dropped into it."</p>
-        <p class="trust-name">UI Direction</p>
+        <h3>Consistency</h3>
+        <p class="trust-quote">The line stays steady. What you find here belongs to the same quiet point of view.</p>
       </article>
       <article class="trust-card fade-up fade-delay-1">
-        <p class="trust-quote">"The products page gives every item more presence, which makes the catalog easier to trust and browse."</p>
-        <p class="trust-name">Catalog Strategy</p>
+        <h3>Purpose</h3>
+        <p class="trust-quote">Nothing is added for effect alone. Every detail has to earn its place.</p>
       </article>
       <article class="trust-card fade-up fade-delay-2">
-        <p class="trust-quote">"This visual system is ready for future collections, checkout, promos, and branded campaigns."</p>
-        <p class="trust-name">Scalability</p>
+        <h3>Presence</h3>
+        <p class="trust-quote">What belongs now should still belong later, after the mood changes and the noise moves on.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<section id="invitation" class="cta-section">
   <div class="container">
-    <div class="cta-panel fade-up">
-      <h2 class="cta-heading">Browse the full collection</h2>
+    <div class="cta-panel invitation-panel fade-up">
+      <p class="section-kicker">Invitation</p>
+      <h2 class="cta-heading">Explore when it feels natural.</h2>
       <p class="section-body">
-        Explore the full catalog with the upgraded card layout, gallery modal, and stronger visual hierarchy.
+        Move through the collection at your own pace. Follow what holds your attention and leave the rest behind.
       </p>
-      <a href="/products" class="btn btn-brand">Open Products</a>
+      <div class="invitation-actions">
+        <a href="/products" class="btn btn-outline">Explore the collection</a>
+        <a href="/about" class="btn btn-ghost">Read the philosophy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="closing" class="closing-section">
+  <div class="container">
+    <div class="closing-panel fade-up">
+      <p class="section-kicker">Closing</p>
+      <p class="closing-line">Some things do not ask for attention. They earn a place anyway.</p>
     </div>
   </div>
 </section>

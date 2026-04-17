@@ -5,7 +5,7 @@ const renderHome = async (req, res, next) => {
     const products = await productStore.getAllProducts();
 
     res.render("home", {
-      pageTitle: "Home",
+      pageTitle: "Rise&Shine",
       bodyClass: "home-showcase",
       mainClass: "site-main",
       products: products.slice(0, 6),

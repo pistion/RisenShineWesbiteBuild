@@ -3,13 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= pageTitle %> | Ecommerce Starter</title>
+    <title><%= navActive === "home" || !pageTitle || pageTitle === "Rise&Shine" ? "Rise&Shine" : `${pageTitle} | Rise&Shine` %></title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body class="<%= bodyClass || 'default-page' %>">
     <header class="topbar">
       <div class="container topbar-inner">
-        <a class="brand" href="/">Ecommerce Starter</a>
+        <a class="brand" href="/" aria-label="Rise and Shine Home">
+          <span class="brand-monogram">R&S</span>
+          <span class="brand-lockup">
+            <span class="brand-wordmark">Rise&amp;Shine</span>
+            <span class="brand-tag">Quiet essentials for an intentional life</span>
+          </span>
+        </a>
         <nav class="main-nav" aria-label="Primary Navigation">
           <a class="nav-link <%= navActive === 'home' ? 'is-active' : '' %>" href="/">Home</a>
           <a class="nav-link <%= navActive === 'products' ? 'is-active' : '' %>" href="/products">Products</a>

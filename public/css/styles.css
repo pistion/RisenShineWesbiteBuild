@@ -85,12 +85,53 @@ textarea {
 }
 
 .brand {
+  align-items: center;
   color: var(--ink);
+  display: inline-flex;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  gap: 0.9rem;
   text-decoration: none;
+}
+
+.brand-monogram {
+  align-items: center;
+  background:
+    linear-gradient(145deg, rgba(255, 245, 238, 0.95), rgba(247, 228, 217, 0.92));
+  border: 1px solid rgba(220, 194, 203, 0.9);
+  border-radius: 18px;
+  box-shadow:
+    0 14px 24px rgba(45, 28, 37, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  color: var(--brand-deep);
+  display: inline-flex;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  height: 50px;
+  justify-content: center;
+  letter-spacing: 1.2px;
+  min-width: 58px;
+  padding: 0 0.95rem;
+}
+
+.brand-lockup {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.brand-wordmark {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 0.92;
+}
+
+.brand-tag {
+  color: var(--muted);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.22px;
 }
 
 .main-nav {
@@ -445,6 +486,11 @@ textarea {
   padding: 1.9rem;
 }
 
+.story-stack {
+  display: grid;
+  gap: 1rem;
+}
+
 .story-meta {
   margin-top: 1rem;
 }
@@ -453,6 +499,7 @@ textarea {
   padding-bottom: 1rem;
 }
 
+.belief-grid,
 .value-grid,
 .trust-grid,
 .showcase-grid {
@@ -460,10 +507,12 @@ textarea {
   gap: 1.2rem;
 }
 
+.belief-grid,
 .value-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.belief-card,
 .value-card,
 .trust-card {
   height: 100%;
@@ -471,7 +520,36 @@ textarea {
   transition: transform 0.2s ease, box-shadow 0.24s ease;
 }
 
+.belief-card {
+  background: linear-gradient(145deg, #fffefb 0%, #fff3ec 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.belief-label {
+  color: var(--brand-deep);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.85px;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+
+.belief-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.32rem;
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+}
+
+.belief-copy,
+.showcase-copy {
+  color: var(--muted);
+}
+
 .value-card:hover,
+.belief-card:hover,
 .showcase-card:hover,
 .catalog-card:hover,
 .trust-card:hover {
@@ -560,6 +638,25 @@ textarea {
   text-decoration: none;
 }
 
+.showcase-copy {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.9rem;
+  min-height: 4.75rem;
+}
+
+.showcase-link {
+  color: var(--brand-deep);
+  font-size: 0.94rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+}
+
+.showcase-link:hover {
+  color: var(--ink);
+}
+
 .showcase-price,
 .catalog-product-price,
 .price {
@@ -570,6 +667,83 @@ textarea {
 
 .gallery-section {
   padding: 0 0 84px;
+}
+
+.identity-grid,
+.craft-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.identity-grid {
+  align-items: stretch;
+  grid-template-columns: minmax(0, 1.18fr) minmax(240px, 0.82fr);
+}
+
+.identity-note,
+.craft-card,
+.closing-panel {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.identity-note {
+  background: linear-gradient(150deg, #fff7f0 0%, #fffdf9 100%);
+  display: grid;
+  gap: 1rem;
+  padding: 1.8rem;
+}
+
+.identity-note p {
+  border-top: 1px solid rgba(220, 194, 203, 0.5);
+  color: var(--muted);
+  font-size: 1rem;
+  padding-top: 1rem;
+}
+
+.identity-note p:first-child {
+  border-top: 0;
+  color: var(--ink);
+  padding-top: 0;
+}
+
+.craft-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
+}
+
+.craft-card {
+  background: linear-gradient(145deg, #fffefa 0%, #fff5ef 100%);
+  padding: 1.85rem;
+}
+
+.craft-list {
+  display: grid;
+  gap: 1.1rem;
+  list-style: none;
+}
+
+.craft-list li {
+  border-top: 1px solid rgba(220, 194, 203, 0.55);
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1rem;
+}
+
+.craft-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.craft-list strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.14rem;
+  font-weight: 700;
+}
+
+.craft-list span {
+  color: var(--muted);
 }
 
 .gallery-grid {
@@ -609,6 +783,12 @@ textarea {
   margin-top: 1rem;
 }
 
+.trust-card h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.18rem;
+  margin-bottom: 0.5rem;
+}
+
 .cta-section {
   padding-bottom: 1rem;
 }
@@ -619,9 +799,41 @@ textarea {
   text-align: center;
 }
 
+.invitation-panel {
+  background: linear-gradient(145deg, #fff7f4 0%, #fffcf8 100%);
+}
+
+.invitation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 1.35rem;
+}
+
 .cta-heading {
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   margin-bottom: 0.6rem;
+}
+
+.closing-section {
+  padding: 0 0 2.5rem;
+}
+
+.closing-panel {
+  background:
+    radial-gradient(circle at top left, rgba(255, 244, 238, 0.9), transparent 48%),
+    linear-gradient(145deg, #fffefb 0%, #f7eff4 100%);
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.closing-line {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.95rem, 4.2vw, 3.3rem);
+  line-height: 1.08;
+  margin: 0 auto;
+  max-width: 15ch;
 }
 
 .catalog-page {
@@ -1010,6 +1222,116 @@ textarea {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.founder-layout {
+  align-items: stretch;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  margin-bottom: 1.25rem;
+}
+
+.founder-portrait-card,
+.founder-message-card,
+.about-story-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.founder-portrait-card {
+  background: linear-gradient(145deg, #fff8f3 0%, #fffefb 100%);
+  padding: 1.4rem;
+}
+
+.founder-portrait-placeholder {
+  align-items: center;
+  aspect-ratio: 4 / 5;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 40%),
+    linear-gradient(160deg, #f7e2d9 0%, #f3d9d8 45%, #efe8f3 100%);
+  border: 1px solid rgba(220, 194, 203, 0.85);
+  border-radius: 18px;
+  color: var(--brand-deep);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.founder-portrait-placeholder span {
+  border: 1px solid rgba(143, 64, 86, 0.18);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1;
+  padding: 1.2rem 1.5rem;
+}
+
+.founder-image-note {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 0.9rem;
+  text-align: center;
+}
+
+.founder-message-card {
+  background: linear-gradient(145deg, #fffefa 0%, #fff7f1 100%);
+  padding: 1.8rem;
+}
+
+.founder-message-card h2,
+.about-story-card h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1.12;
+  margin-bottom: 0.85rem;
+}
+
+.founder-quote {
+  border-left: 3px solid rgba(181, 91, 115, 0.35);
+  color: var(--ink);
+  display: grid;
+  gap: 0.95rem;
+  margin: 1rem 0 1.2rem;
+  padding-left: 1rem;
+}
+
+.founder-quote p {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.08rem, 2vw, 1.34rem);
+  line-height: 1.5;
+}
+
+.founder-signoff {
+  border-top: 1px solid rgba(220, 194, 203, 0.55);
+  display: grid;
+  gap: 0.12rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+}
+
+.founder-signoff strong {
+  font-size: 1rem;
+}
+
+.founder-signoff span {
+  color: var(--muted);
+}
+
+.about-story-card {
+  background: linear-gradient(145deg, #fff8f4 0%, #fffdf9 100%);
+  display: grid;
+  gap: 0.95rem;
+  margin-bottom: 1.25rem;
+  padding: 1.8rem;
+}
+
+.about-info-card {
+  display: grid;
+  gap: 0.4rem;
 }
 
 .info-card,
@@ -1451,12 +1773,23 @@ textarea {
     padding: 0.9rem 0;
   }
 
+  .brand {
+    gap: 0.75rem;
+  }
+
+  .brand-wordmark {
+    font-size: 1.6rem;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
 
   .product-view-layout,
-  .checkout-layout {
+  .checkout-layout,
+  .founder-layout,
+  .identity-grid,
+  .craft-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1482,6 +1815,23 @@ textarea {
 
   .hero-copy {
     padding: 3rem 0;
+  }
+
+  .brand {
+    align-items: flex-start;
+  }
+
+  .brand-monogram {
+    height: 46px;
+    min-width: 54px;
+  }
+
+  .brand-wordmark {
+    font-size: 1.42rem;
+  }
+
+  .brand-tag {
+    font-size: 0.68rem;
   }
 
   .hero-title {
@@ -1512,18 +1862,38 @@ textarea {
   }
 
   .story-card,
+  .belief-card,
   .value-card,
   .showcase-card,
   .catalog-card,
   .trust-card,
   .cta-panel,
+  .founder-portrait-card,
+  .founder-message-card,
+  .about-story-card,
+  .identity-note,
   .cart-item,
   .cart-summary,
   .content-card,
+  .craft-card,
+  .closing-panel,
   .empty-state,
   .detail-media,
   .detail-content {
     border-radius: 16px;
+  }
+
+  .closing-panel {
+    padding: 1.8rem 1.4rem;
+  }
+
+  .showcase-copy {
+    min-height: auto;
+  }
+
+  .founder-message-card,
+  .about-story-card {
+    padding: 1.45rem;
   }
 
   .cart-item {
