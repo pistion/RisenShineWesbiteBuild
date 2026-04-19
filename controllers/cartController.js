@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { isValidProductId } = require("../models/Product");
 const productStore = require("../services/productStore");
 const {
   initializeCart,
@@ -23,7 +23,7 @@ const addToCart = async (req, res, next) => {
     const { productId } = req.body;
     const quantity = Math.max(1, Number.parseInt(req.body.quantity || "1", 10));
 
-    if (!mongoose.Types.ObjectId.isValid(productId)) {
+    if (!isValidProductId(productId)) {
       return res.status(400).render("error", {
         pageTitle: "Error",
         statusCode: 400,

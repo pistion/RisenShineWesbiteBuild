@@ -1,9 +1,10 @@
 {
   "name": "ecommerce-express-starter",
   "version": "1.0.0",
-  "description": "Clean and scalable Node.js + Express ecommerce starter project",
+  "description": "Clean and scalable Node.js + Express ecommerce starter project with PostgreSQL",
   "main": "server.js",
   "scripts": {
+    "db:init": "node scripts/initDb.js",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "seed": "node scripts/seedProducts.js"
@@ -12,7 +13,7 @@
     "nodejs",
     "express",
     "ecommerce",
-    "mongoose",
+    "postgresql",
     "ejs"
   ],
   "author": "",
@@ -22,8 +23,8 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
-    "mongoose": "^8.8.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pg": "^8.13.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

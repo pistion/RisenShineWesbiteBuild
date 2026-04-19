@@ -744,6 +744,63 @@ textarea {
   color: var(--ink);
 }
 
+.review-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.review-card {
+  background: linear-gradient(145deg, #fffefb 0%, #fff7f2 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+  transition: transform 0.2s ease, box-shadow 0.24s ease;
+}
+
+.review-card:hover {
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-4px);
+}
+
+.review-head {
+  align-items: center;
+  display: flex;
+  gap: 0.9rem;
+}
+
+.review-avatar {
+  border-radius: 18px;
+  box-shadow: 0 12px 24px rgba(45, 28, 37, 0.12);
+  height: 72px;
+  object-fit: cover;
+  width: 72px;
+}
+
+.review-author {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.review-author strong {
+  font-size: 1rem;
+}
+
+.review-author span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.review-copy {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
 .showcase-price,
 .catalog-product-price,
 .price {
@@ -2165,6 +2222,12 @@ textarea {
 
   .catalog-card-top {
     min-height: 250px;
+  }
+
+  .review-avatar {
+    border-radius: 14px;
+    height: 64px;
+    width: 64px;
   }
 
   .catalog-card-bottom {

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { isValidProductId } = require("../models/Product");
 const productStore = require("../services/productStore");
 
 const getAllProducts = async (req, res, next) => {
@@ -14,8 +14,10 @@ const getSingleProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ success: false, message: "Invalid product id" });
+    if (!isValidProductId(id)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid product id" });
     }
 
     const product = await productStore.getProductById(id);
@@ -48,7 +50,7 @@ const renderProductDetailPage = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidProductId(id)) {
       return res.status(404).render("404", { pageTitle: "Product Not Found" });
     }
 

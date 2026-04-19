@@ -1,25 +1,29 @@
 <%- include("partials/header") %>
 
 <%
-  const homeFallbackGallery = [
-    "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80"
+  const reviewEntries = [
+    {
+      name: "Alina P.",
+      title: "Customer Review",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+      review:
+        "Shopping from home felt easy from the first click. The whole experience was calm, clear, and simple to trust."
+    },
+    {
+      name: "Maria K.",
+      title: "Customer Review",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
+      review:
+        "I loved how comfortable everything felt. It did not feel rushed or confusing, just smooth from browsing to ordering."
+    },
+    {
+      name: "Janel S.",
+      title: "Customer Review",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+      review:
+        "It feels like a store with bigger plans behind it. There is care in the presentation, and that makes the shopping experience feel stronger."
+    }
   ];
-
-  const expressionLines = [
-    "Made for the parts of the day that ask for quiet movement and ease.",
-    "A familiar presence that carries what matters without pulling focus.",
-    "Something you reach for when the room, and your mind, need less noise.",
-    "Kept close in the small rituals that make a morning feel settled.",
-    "Worn into the rhythm of the week until it feels like it was always there.",
-    "Placed where light changes slowly and attention has room to soften."
-  ];
-
-  const featuredProducts = products.slice(0, 4);
 %>
 
 <section class="hero-section">
@@ -35,129 +39,20 @@
 
       <div class="hero-actions fade-up fade-delay-1">
         <p class="hero-actions-label">Begin Here</p>
-        <a class="btn btn-brand" href="#atmosphere">
+        <a class="btn btn-brand" href="#craft">
           <span class="hero-btn-copy">
             <strong>Step In</strong>
-            <small>Start with the feeling</small>
+            <small>See the intention</small>
           </span>
         </a>
         <a class="btn btn-soft" href="#expression">
           <span class="hero-btn-copy">
-            <strong>See the pieces</strong>
-            <small>Move closer to the pieces</small>
+            <strong>Read the reviews</strong>
+            <small>Hear from customers</small>
           </span>
         </a>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="atmosphere" class="section-space">
-  <div class="container">
-    <div class="section-head fade-up">
-      <p class="section-kicker">Atmosphere</p>
-      <h2 class="section-title">A slower world, kept on purpose.</h2>
-    </div>
-    <article class="story-card fade-up fade-delay-1 story-stack">
-      <p class="section-body">
-        Here, the pace softens. Light stays a little longer on a surface. Familiar shapes settle into the room without asking to be noticed.
-      </p>
-      <p class="section-body">
-        This is a world built around presence, repetition, and restraint. Around the quiet comfort of living with things that feel right long after the first glance.
-      </p>
-    </article>
-  </div>
-</section>
-
-<section id="philosophy" class="values-section">
-  <div class="container">
-    <div class="section-head fade-up">
-      <p class="section-kicker">Philosophy</p>
-      <h2 class="section-title">We are not here for noise. We are here for what stays.</h2>
-    </div>
-    <div class="belief-grid">
-      <article class="belief-card fade-up">
-        <p class="belief-label">What We Reject</p>
-        <h3 class="belief-title">Nothing here is made to chase a moment.</h3>
-        <p class="belief-copy">There is enough urgency in the world already. We have no interest in adding more.</p>
-      </article>
-      <article class="belief-card fade-up fade-delay-1">
-        <p class="belief-label">What We Keep</p>
-        <h3 class="belief-title">We return to pieces that feel settled, clear, and lasting.</h3>
-        <p class="belief-copy">What belongs should feel more natural with time, not less.</p>
-      </article>
-      <article class="belief-card fade-up fade-delay-2">
-        <p class="belief-label">What We Remove</p>
-        <h3 class="belief-title">If it distracts, it does not stay.</h3>
-        <p class="belief-copy">We prefer form with a point of view and restraint with intention.</p>
-      </article>
-      <article class="belief-card fade-up fade-delay-3">
-        <p class="belief-label">What We Believe</p>
-        <h3 class="belief-title">The right object does not compete with you. It moves with you.</h3>
-        <p class="belief-copy">It becomes part of the rhythm, part of the room, part of the way a day unfolds.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="identity" class="section-space section-tight-top">
-  <div class="container">
-    <div class="identity-grid">
-      <article class="story-card fade-up story-stack">
-        <p class="section-kicker">Identity</p>
-        <h2 class="section-title">You know when something feels right before you can explain it.</h2>
-        <p class="section-body">
-          You notice proportion. You care how something lands in a room, how it feels in the hand, how often you reach for it without thinking.
-        </p>
-        <p class="section-body">
-          You are not looking for more. You are looking for what belongs. For what aligns with the pace you protect and the attention you give to the details that stay with you.
-        </p>
-      </article>
-
-      <aside class="identity-note fade-up fade-delay-1">
-        <p>For the ones who trust quiet conviction.</p>
-        <p>For the ones who edit before they add.</p>
-        <p>For the ones who want less noise and more meaning around them.</p>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<section id="expression" class="section-space section-tight-top">
-  <div class="container">
-    <div class="section-heading-row fade-up">
-      <div class="section-head section-head-inline">
-        <p class="section-kicker">Expression</p>
-        <h2 class="section-title">The pieces arrive as a continuation of the philosophy.</h2>
-        <p class="section-body">
-          Nothing here needs to announce itself. It simply finds its place in motion, in routine, in the quiet structure of a day.
-        </p>
-      </div>
-      <a class="btn btn-outline" href="/products">See more</a>
-    </div>
-
-    <% if (!featuredProducts.length) { %>
-      <div class="empty-state polished-card">
-        <p>The collection is still taking shape.</p>
-      </div>
-    <% } else { %>
-      <div class="showcase-grid">
-        <% featuredProducts.forEach((product, index) => { %>
-          <% const image = product.images && product.images.length ? product.images[0] : homeFallbackGallery[index % homeFallbackGallery.length]; %>
-          <article class="showcase-card fade-up <%= index > 1 ? 'fade-delay-1' : '' %>">
-            <a href="/products/<%= product._id %>" class="showcase-image-link" aria-label="View <%= product.name %>">
-              <img src="<%= image %>" alt="<%= product.name %>" class="showcase-image" loading="lazy" />
-            </a>
-            <div class="showcase-meta">
-              <p class="showcase-category"><%= product.category %></p>
-              <h3 class="showcase-name"><a href="/products/<%= product._id %>"><%= product.name %></a></h3>
-              <p class="showcase-copy"><%= expressionLines[index % expressionLines.length] %></p>
-              <a class="showcase-link" href="/products/<%= product._id %>">See more</a>
-            </div>
-          </article>
-        <% }); %>
-      </div>
-    <% } %>
   </div>
 </section>
 
@@ -235,6 +130,33 @@
   </div>
 </section>
 
+<section id="expression" class="section-space section-tight-top">
+  <div class="container">
+    <div class="section-head fade-up">
+      <p class="section-kicker">Customer Reviews</p>
+      <h2 class="section-title">What people remember most is how easy the experience feels.</h2>
+      <p class="section-body">
+        These reviews reflect the kind of store Rise N Reign is becoming: smoother to browse, easier to trust, and more comfortable to shop from home.
+      </p>
+    </div>
+
+    <div class="review-grid">
+      <% reviewEntries.forEach((entry, index) => { %>
+        <article class="review-card fade-up <%= index > 0 ? 'fade-delay-1' : '' %>">
+          <div class="review-head">
+            <img src="<%= entry.image %>" alt="<%= entry.name %>" class="review-avatar" loading="lazy" />
+            <div class="review-author">
+              <strong><%= entry.name %></strong>
+              <span><%= entry.title %></span>
+            </div>
+          </div>
+          <p class="review-copy">"<%= entry.review %>"</p>
+        </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
 <section id="invitation" class="cta-section">
   <div class="container">
     <div class="cta-panel invitation-panel fade-up">
@@ -245,7 +167,7 @@
       </p>
       <div class="invitation-actions">
         <a href="/products" class="btn btn-outline">Explore the collection</a>
-        <a href="/about" class="btn btn-ghost">Read the philosophy</a>
+        <a href="/about" class="btn btn-ghost">Read our story</a>
       </div>
     </div>
   </div>
