@@ -31,7 +31,7 @@ const serializeOrderForDb = ({
     country: String(customer.country || "").trim(),
     subtotal: Number(subtotal || 0),
     itemCount: Number.parseInt(itemCount || 0, 10),
-    currency: "USD",
+    currency: "PGK",
     status: "pending",
   },
   items: items.map((item) => ({

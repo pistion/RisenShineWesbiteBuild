@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS orders (
   country VARCHAR(120) NOT NULL,
   subtotal NUMERIC(10, 2) NOT NULL CHECK (subtotal >= 0),
   item_count INTEGER NOT NULL CHECK (item_count >= 0),
-  currency VARCHAR(10) NOT NULL DEFAULT 'USD',
+  currency VARCHAR(10) NOT NULL DEFAULT 'PGK',
   status VARCHAR(50) NOT NULL DEFAULT 'pending',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

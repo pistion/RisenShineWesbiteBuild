@@ -36,11 +36,15 @@ const resolveNavActive = (pathname) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.locals.formatCurrency = (value) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(value);
+app.locals.formatCurrency = (value) => {
+  const amount = Number(value || 0);
+
+  if (Number.isInteger(amount)) {
+    return `K${amount}`;
+  }
+
+  return `K${amount.toFixed(2)}`;
+};
 
 app.use(requestLogger);
 app.use(express.json());

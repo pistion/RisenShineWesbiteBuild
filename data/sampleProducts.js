@@ -80,7 +80,7 @@ module.exports = [
   {
     _id: "660000000000000000000007",
     name: "Wedge Sandals",
-    price: 58.99,
+    price: 70,
     description:
       "Open-toe wedge sandals with a secure ankle strap and an easy everyday shape, shown in warm neutral, coral, and black finishes.",
     images: [
@@ -111,7 +111,7 @@ module.exports = [
   {
     _id: "660000000000000000000009",
     name: "Brisbane Polo Shirt Collection",
-    price: 69.99,
+    price: 120,
     description:
       "A Brisbane-inspired polo shirt collection with multiple supporter-style variations in navy, maroon, gold, and contrast-panel finishes.",
     images: [
@@ -130,7 +130,7 @@ module.exports = [
   {
     _id: "660000000000000000000010",
     name: "Curly Loc Extensions",
-    price: 49.99,
+    price: 35,
     description:
       "A soft curly loc extension set shown as a full styled look, pack view, and shade variation gallery for everyday beauty styling.",
     images: [
@@ -145,7 +145,7 @@ module.exports = [
   {
     _id: "660000000000000000000011",
     name: "Collagen Radiance Skin Care Set",
-    price: 54.99,
+    price: 70,
     description:
       "A collagen-focused skin care set presented in both boxed and styled product views, featuring cleanser, toner, serum, face lotion, face cream, and eye cream.",
     images: [
@@ -159,7 +159,7 @@ module.exports = [
   {
     _id: "660000000000000000000012",
     name: "Panthers NRL Jersey",
-    price: 72.99,
+    price: 100,
     description:
       "A Penrith Panthers jersey with two closely related black supporter-style variations shown in the gallery.",
     images: [
@@ -173,7 +173,7 @@ module.exports = [
   {
     _id: "660000000000000000000013",
     name: "Sharks NRL Jersey",
-    price: 72.99,
+    price: 100,
     description:
       "A Cronulla Sharks supporter-style jersey in a sky-blue colorway with bold sponsor detailing and classic team striping.",
     images: ["/images/products/sharks-jersey-sky.jpg"],
@@ -184,7 +184,7 @@ module.exports = [
   {
     _id: "660000000000000000000014",
     name: "Dolphins NRL Jersey",
-    price: 72.99,
+    price: 100,
     description:
       "A Dolphins supporter-style jersey in a bright red and sand-toned finish with clean chevron detailing across the body.",
     images: ["/images/products/dolphins-jersey-red.jpg"],
@@ -195,7 +195,7 @@ module.exports = [
   {
     _id: "660000000000000000000015",
     name: "Eels NRL Jersey",
-    price: 74.99,
+    price: 100,
     description:
       "A Parramatta Eels art-style jersey featuring bold blue and gold colors with a strong illustrated front design.",
     images: ["/images/products/eels-jersey-art.jpg"],
@@ -206,7 +206,7 @@ module.exports = [
   {
     _id: "660000000000000000000016",
     name: "Dragons NRL Jersey",
-    price: 72.99,
+    price: 100,
     description:
       "A St George Illawarra Dragons supporter-style jersey in the classic white base with the strong red V front.",
     images: ["/images/products/dragons-jersey-white.jpg"],
@@ -217,7 +217,7 @@ module.exports = [
   {
     _id: "660000000000000000000017",
     name: "Panthers NRL Hoodie",
-    price: 84.99,
+    price: 150,
     description:
       "A Panthers supporter-style hoodie shown in grey and black color variations, with the same core design across both images.",
     images: [
@@ -231,7 +231,7 @@ module.exports = [
   {
     _id: "660000000000000000000018",
     name: "Rolling Clothes Rack",
-    price: 79.99,
+    price: 100,
     description:
       "A mobile multi-rail clothes rack with caster wheels, designed to hold dresses, folded pieces, and everyday garments in one compact station.",
     images: ["/images/products/rolling-clothes-rack.jpg"],
@@ -242,7 +242,7 @@ module.exports = [
   {
     _id: "660000000000000000000019",
     name: "Batana Oil Hair Treatment",
-    price: 28.99,
+    price: 30,
     description:
       "A batana oil hair treatment jar presented as a nutrient-rich beauty product for everyday hair care and moisture support.",
     images: ["/images/products/batana-oil-jar.jpg"],
@@ -253,7 +253,7 @@ module.exports = [
   {
     _id: "660000000000000000000020",
     name: "Brisbane Training Singlet",
-    price: 59.99,
+    price: 100,
     description:
       "A Brisbane supporter-style training singlet in a bright gold colorway with the same bold graphic language as the rest of the collection.",
     images: ["/images/products/brisbane-training-singlet-gold.jpg"],
