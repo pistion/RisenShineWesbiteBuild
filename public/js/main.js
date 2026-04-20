@@ -185,9 +185,14 @@
   }
 
   if (feedback) {
+    const feedbackStorageKey = "rise-n-reign-cart-feedback";
     let feedbackTimer = null;
 
     const showFeedback = (message) => {
+      if (!message) {
+        return;
+      }
+
       feedback.textContent = message;
       feedback.classList.add("show");
 
@@ -200,29 +205,104 @@
       }, 1700);
     };
 
-    const bumpCartCount = (quantity) => {
+    const queueFeedback = (message) => {
+      if (!message) {
+        return;
+      }
+
+      try {
+        window.sessionStorage.setItem(feedbackStorageKey, message);
+      } catch (error) {
+        // Ignore storage failures.
+      }
+    };
+
+    const consumeQueuedFeedback = () => {
+      try {
+        const message = window.sessionStorage.getItem(feedbackStorageKey);
+        if (!message) {
+          return;
+        }
+
+        window.sessionStorage.removeItem(feedbackStorageKey);
+        showFeedback(message);
+      } catch (error) {
+        // Ignore storage failures.
+      }
+    };
+
+    const updateCartCount = (count) => {
       const cartLink = document.querySelector(".cart-nav-link");
 
-      if (!cartLink) {
+      if (!cartLink || !Number.isFinite(Number(count))) {
         return;
       }
 
-      const match = (cartLink.textContent || "").match(/\((\d+)\)/);
-      if (!match) {
+      const nextCount = Number(count);
+      const nextLabel = `Cart (${nextCount})`;
+      const match = (cartLink.textContent || "").match(/\(\d+\)/);
+
+      if (match) {
+        cartLink.textContent = cartLink.textContent.replace(/\(\d+\)/, `(${nextCount})`);
         return;
       }
 
-      const current = Number(match[1]) || 0;
-      const nextCount = current + (Number(quantity) || 1);
-      cartLink.textContent = cartLink.textContent.replace(/\(\d+\)/, `(${nextCount})`);
+      cartLink.textContent = nextLabel;
     };
+
+    const readResponsePayload = async (response) => {
+      const contentType = response.headers.get("content-type") || "";
+
+      if (contentType.includes("application/json")) {
+        return response.json();
+      }
+
+      const text = await response.text();
+      return {
+        success: response.ok,
+        message: text,
+      };
+    };
+
+    const postForm = async (form) => {
+      const formData = new URLSearchParams(new FormData(form));
+      const response = await fetch(form.action, {
+        method: form.method || "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: formData.toString(),
+      });
+
+      const payload = await readResponsePayload(response);
+
+      if (!response.ok || payload.success === false) {
+        throw new Error(payload.message || "Unable to update your cart right now.");
+      }
+
+      return payload;
+    };
+
+    const handlePendingButton = (button, text) => {
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = text;
+
+      return () => {
+        button.disabled = false;
+        button.textContent = originalText;
+      };
+    };
+
+    consumeQueuedFeedback();
 
     document.querySelectorAll(".js-add-cart-form").forEach((form) => {
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const submitButton = form.querySelector("button[type='submit']");
-        const quantityField = form.querySelector("[name='quantity']");
         if (!submitButton || submitButton.disabled) {
           return;
         }
@@ -232,35 +312,68 @@
         submitButton.textContent = "Adding...";
 
         try {
-          const formData = new URLSearchParams(new FormData(form));
-          const response = await fetch(form.action, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: formData.toString(),
-          });
+          const payload = await postForm(form);
+          const successMessage =
+            payload.message || `${submitButton.dataset.productName || "Item"} added to cart.`;
 
-          if (!response.ok) {
-            throw new Error("Request failed");
-          }
-
-          const quantityValue = quantityField
-            ? quantityField.value || "1"
-            : submitButton.dataset.quantity || "1";
-
-          showFeedback(`${submitButton.dataset.productName || "Item"} added to cart`);
-          bumpCartCount(quantityValue);
+          updateCartCount(payload.cart && payload.cart.itemCount);
+          showFeedback(successMessage);
           submitButton.textContent = "Added";
 
-          setTimeout(() => {
+          window.setTimeout(() => {
             submitButton.textContent = originalText;
           }, 1000);
         } catch (error) {
-          showFeedback("Unable to add item right now");
+          showFeedback(error.message || "Unable to add item right now.");
           submitButton.textContent = originalText;
         } finally {
           submitButton.disabled = false;
+        }
+      });
+    });
+
+    document.querySelectorAll(".js-cart-update-form").forEach((form) => {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = form.querySelector("button[type='submit']");
+        if (!submitButton || submitButton.disabled) {
+          return;
+        }
+
+        const resetButton = handlePendingButton(submitButton, "Updating...");
+
+        try {
+          const payload = await postForm(form);
+          updateCartCount(payload.cart && payload.cart.itemCount);
+          queueFeedback(payload.message || "Cart updated.");
+          window.location.reload();
+        } catch (error) {
+          showFeedback(error.message || "Unable to update cart right now.");
+          resetButton();
+        }
+      });
+    });
+
+    document.querySelectorAll(".js-cart-remove-form").forEach((form) => {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = form.querySelector("button[type='submit']");
+        if (!submitButton || submitButton.disabled) {
+          return;
+        }
+
+        const resetButton = handlePendingButton(submitButton, "Removing...");
+
+        try {
+          const payload = await postForm(form);
+          updateCartCount(payload.cart && payload.cart.itemCount);
+          queueFeedback(payload.message || "Item removed from cart.");
+          window.location.reload();
+        } catch (error) {
+          showFeedback(error.message || "Unable to remove item right now.");
+          resetButton();
         }
       });
     });

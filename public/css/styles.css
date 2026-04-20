@@ -1354,6 +1354,22 @@ textarea {
   transform: translateY(0);
 }
 
+.inline-notice {
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  padding: 0.95rem 1rem;
+}
+
+.inline-notice p {
+  margin: 0;
+}
+
+.inline-notice-success {
+  background: #f4faf2;
+  border: 1px solid #d7eacd;
+  color: #32533a;
+}
+
 .product-view-shell,
 .checkout-shell {
   padding: 2.5rem 0 3.5rem;
@@ -1569,38 +1585,44 @@ textarea {
 
 .founder-portrait-card {
   background: linear-gradient(145deg, #fff8f3 0%, #fffefb 100%);
+  display: grid;
+  gap: 0.95rem;
   padding: 1.4rem;
 }
 
-.founder-portrait-placeholder {
-  align-items: center;
-  aspect-ratio: 4 / 5;
+.founder-portrait-frame {
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 40%),
-    linear-gradient(160deg, #f7e2d9 0%, #f3d9d8 45%, #efe8f3 100%);
-  border: 1px solid rgba(220, 194, 203, 0.85);
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 38%),
+    linear-gradient(160deg, #f7e2d9 0%, #eadfef 100%);
+  border: 1px solid rgba(220, 194, 203, 0.7);
   border-radius: 18px;
-  color: var(--brand-deep);
-  display: flex;
-  justify-content: center;
   overflow: hidden;
+  padding: 0.45rem;
 }
 
-.founder-portrait-placeholder span {
-  border: 1px solid rgba(143, 64, 86, 0.18);
-  border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  line-height: 1;
-  padding: 1.2rem 1.5rem;
+.founder-portrait-photo {
+  aspect-ratio: 4 / 5.35;
+  border-radius: 14px;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
 }
 
 .founder-image-note {
+  display: grid;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.founder-image-note strong {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.founder-image-note span {
   color: var(--muted);
   font-size: 0.92rem;
-  margin-top: 0.9rem;
-  text-align: center;
 }
 
 .founder-message-card {
@@ -1768,8 +1790,26 @@ textarea {
   display: block;
 }
 
+.field-block-full {
+  width: 100%;
+}
+
 .field-block-wide {
   grid-column: span 1;
+}
+
+.field-inline {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.75rem;
+}
+
+.field-inline .field-label {
+  margin: 0;
+}
+
+.field-inline input {
+  max-width: 92px;
 }
 
 .checkout-actions {
@@ -1788,6 +1828,12 @@ textarea {
 .order-summary-card {
   position: sticky;
   top: 108px;
+}
+
+.checkout-note {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 1rem 0 0;
 }
 
 .order-line-items {
@@ -1941,9 +1987,38 @@ textarea {
 
 .cart-item {
   align-items: center;
-  display: flex;
+  display: grid;
   gap: 1rem;
+  grid-template-columns: 140px minmax(0, 1fr) auto;
   justify-content: space-between;
+}
+
+.cart-item-visual {
+  background: #fbf4ef;
+  border: 1px solid #f1e1da;
+  border-radius: 18px;
+  min-height: 140px;
+  overflow: hidden;
+}
+
+.cart-item-visual img,
+.cart-item-placeholder {
+  height: 100%;
+  width: 100%;
+}
+
+.cart-item-visual img {
+  display: block;
+  object-fit: cover;
+}
+
+.cart-item-placeholder {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 0.92rem;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .cart-item-meta {
@@ -1964,6 +2039,24 @@ textarea {
 
 .cart-item-copy strong {
   color: var(--ink);
+}
+
+.cart-quantity-form {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.cart-quantity-form input {
+  background: #fff;
+  border: 1px solid #dbc7bf;
+  border-radius: 10px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 44px;
+  padding: 0 0.85rem;
 }
 
 .cart-item-side {
@@ -2058,6 +2151,11 @@ textarea {
   gap: 0.8rem;
   justify-content: center;
   margin-top: 1.4rem;
+}
+
+.status-note {
+  color: var(--muted);
+  margin-top: 1rem;
 }
 
 .content-card ul {
@@ -2313,12 +2411,13 @@ textarea {
 
   .cart-item {
     align-items: flex-start;
-    flex-direction: column;
+    grid-template-columns: 120px minmax(0, 1fr);
     gap: 0.8rem;
   }
 
   .cart-item-side {
     align-items: flex-start;
+    grid-column: 1 / -1;
   }
 
   .status-card {

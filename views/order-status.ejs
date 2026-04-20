@@ -3,17 +3,23 @@
 <section class="page-shell">
   <div class="container narrow-status">
     <article class="status-card <%= success ? 'status-ok' : 'status-warn' %>">
-      <p class="page-eyebrow"><%= success ? 'Order Confirmed' : 'Checkout Stopped' %></p>
-      <h1><%= success ? 'Your demo order has been placed' : 'Checkout could not be completed' %></h1>
+      <p class="page-eyebrow"><%= success ? 'Order Received' : 'Checkout Stopped' %></p>
+      <h1><%= success ? 'Your order has been received' : 'Checkout could not be completed' %></h1>
       <p><%= message %></p>
 
       <% if (order) { %>
         <div class="status-details">
-          <p><span>Order ID</span><strong><%= order.id %></strong></p>
+          <p><span>Order</span><strong><%= order.orderNumber || order.id %></strong></p>
+          <p><span>Status</span><strong><%= order.status || "pending" %></strong></p>
+          <p><span>Payment</span><strong><%= order.paymentStatus || "pending" %></strong></p>
           <p><span>Items</span><strong><%= order.itemCount %></strong></p>
-          <p><span>Total</span><strong><%= formatCurrency(order.subtotal) %></strong></p>
+          <p><span>Total</span><strong><%= formatCurrency(order.totalAmount || order.subtotal) %></strong></p>
           <p><span>Customer</span><strong><%= order.customer.name %></strong></p>
         </div>
+
+        <% if (order.notes) { %>
+          <p class="status-note"><strong>Order notes:</strong> <%= order.notes %></p>
+        <% } %>
       <% } %>
 
       <div class="status-actions">

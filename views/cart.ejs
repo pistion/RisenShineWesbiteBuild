@@ -1,14 +1,12 @@
 <%- include("partials/header") %>
 
-<% const itemCount = cart.items.reduce((sum, item) => sum + item.quantity, 0); %>
-
 <section class="page-shell">
   <div class="container">
     <div class="page-hero">
       <div class="page-copy">
         <p class="page-eyebrow">Cart</p>
         <h1>Shopping bag</h1>
-        <p>Review selected products, confirm totals, and get the basket ready for checkout expansion.</p>
+        <p>Review what you have added, adjust quantities, and move through checkout with a cleaner summary.</p>
       </div>
       <div class="cart-overview">
         <article class="cart-overview-card">
@@ -22,10 +20,16 @@
       </div>
     </div>
 
+    <% if (notice && notice.message) { %>
+      <div class="inline-notice inline-notice-<%= notice.tone || 'success' %>">
+        <p><%= notice.message %></p>
+      </div>
+    <% } %>
+
     <% if (!cart.items.length) { %>
       <div class="empty-state polished-card">
         <h2>Your cart is empty</h2>
-        <p>Start building your basket from the upgraded catalog experience.</p>
+        <p>Add products from the collection and they will appear here with pricing and checkout-ready totals.</p>
         <div class="empty-state-actions">
           <a class="btn btn-brand" href="/products">Browse Products</a>
           <a class="btn btn-ghost" href="/">Back Home</a>
@@ -35,19 +39,43 @@
       <section class="cart-layout">
         <div class="cart-list">
           <% cart.items.forEach((item) => { %>
-            <article class="cart-item">
+            <article class="cart-item polished-card">
+              <div class="cart-item-visual">
+                <% if (item.image) { %>
+                  <img src="<%= item.image %>" alt="<%= item.name %>" loading="lazy" />
+                <% } else { %>
+                  <div class="cart-item-placeholder">No image</div>
+                <% } %>
+              </div>
+
               <div class="cart-item-meta">
-                <p class="catalog-category"><%= item.quantity %> selected</p>
+                <p class="catalog-category"><%= item.category || "Product" %></p>
                 <h2 class="cart-item-title"><%= item.name %></h2>
                 <div class="cart-item-copy">
                   <span>Unit price <strong><%= formatCurrency(item.price) %></strong></span>
-                  <span>Line total <strong><%= formatCurrency(item.price * item.quantity) %></strong></span>
+                  <span>Available <strong><%= item.maxQuantity || item.quantity %></strong></span>
+                  <span>Line total <strong><%= formatCurrency(item.lineTotal || (item.price * item.quantity)) %></strong></span>
                 </div>
+
+                <form action="/cart/update" method="POST" class="cart-quantity-form js-cart-update-form">
+                  <input type="hidden" name="productId" value="<%= item.productId %>" />
+                  <label class="field-inline">
+                    <span class="field-label">Quantity</span>
+                    <input
+                      type="number"
+                      name="quantity"
+                      value="<%= item.quantity %>"
+                      min="0"
+                      max="<%= item.maxQuantity || item.quantity %>"
+                    />
+                  </label>
+                  <button class="btn btn-ghost" type="submit">Update</button>
+                </form>
               </div>
 
               <div class="cart-item-side">
-                <p class="cart-item-subtotal"><%= formatCurrency(item.price * item.quantity) %></p>
-                <form action="/cart/remove" method="POST">
+                <p class="cart-item-subtotal"><%= formatCurrency(item.lineTotal || (item.price * item.quantity)) %></p>
+                <form action="/cart/remove" method="POST" class="js-cart-remove-form">
                   <input type="hidden" name="productId" value="<%= item.productId %>" />
                   <button class="btn btn-danger" type="submit">Remove</button>
                 </form>
@@ -62,7 +90,7 @@
           <div class="summary-stack">
             <p><span>Items</span><strong><%= itemCount %></strong></p>
             <p><span>Subtotal</span><strong><%= formatCurrency(total) %></strong></p>
-            <p><span>Shipping</span><strong>Calculated later</strong></p>
+            <p><span>Shipping</span><strong>Confirmed after review</strong></p>
           </div>
           <div class="summary-total">
             <span>Total</span>
@@ -75,5 +103,7 @@
     <% } %>
   </div>
 </section>
+
+<div class="cart-feedback" id="cartFeedback" role="status" aria-live="polite"></div>
 
 <%- include("partials/footer") %>
